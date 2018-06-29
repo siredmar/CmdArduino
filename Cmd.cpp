@@ -72,9 +72,6 @@ void cmd_display()
 
     stream->println();
 
-    strcpy_P(buf, cmd_banner);
-    stream->println(buf);
-
     strcpy_P(buf, cmd_prompt);
     stream->print(buf);
 }
@@ -138,7 +135,6 @@ void cmd_handler()
 
     switch (c)
     {
-    case '.':
     case '\r':
         // terminate the msg and reset the msg ptr. then send
         // it to the handler for processing.
@@ -249,4 +245,26 @@ Stream* cmdGetStream(void)
 uint32_t cmdStr2Num(char *str, uint8_t base)
 {
     return strtol(str, NULL, base);
+}
+
+/**************************************************************************/
+/*!
+    Convert a string to a double. 
+*/
+/**************************************************************************/
+double cmdStr2double(char *str)
+{
+    String s(str);
+    return s.toDouble();
+}
+
+/**************************************************************************/
+/*!
+    Convert a string to a float. 
+*/
+/**************************************************************************/
+double cmdStr2float(char *str)
+{
+    String s(str);
+    return s.toFloat();
 }
